@@ -25,18 +25,23 @@ namespace ConsoleApplication2
             uint amount1coins;
 
 
-            Console.Write("Ange totalsumman:");
-            total = double.Parse(Console.ReadLine());
+            //Console.Write("Ange totalsumman:");
+            //total = double.Parse(Console.ReadLine());
 
-            Console.Write("Ange erhållet belopp:");
-            sum = uint.Parse(Console.ReadLine());
+            //Console.Write("Ange erhållet belopp:");
+            //sum = uint.Parse(Console.ReadLine());
 
-            toPay = (uint)Math.Round(total);
+            //toPay = (uint)Math.Round(total);
 
-            round = toPay - total;
+            //round = toPay - total;
 
-            back = sum - toPay;
-
+            //back = sum - toPay;
+            back = 2976;
+            if(back/500 >= 1){
+                amount500notes = back / 500;
+                back %= 500;
+            }
+            Console.WriteLine(back);
 
            
         }   
