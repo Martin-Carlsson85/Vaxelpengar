@@ -11,11 +11,11 @@ namespace ConsoleApplication2
         static void Main(string[] args)
         {
             // Deklarera variabler
-            double total; //Totaltsumman INNAN öresavrundningen
-            uint sum; //Det kunden beatalar inkl.växel
-            uint toPay; //Totaltsumman EFTER öresavrundningen
-            double round; //Öresavrundningen
-            uint back; //Växel att få tillbaka
+            double total = 0; //Totaltsumman INNAN öresavrundningen
+            uint sum = 0; //Det kunden beatalar inkl.växel
+            uint toPay = 0; //Totaltsumman EFTER öresavrundningen
+            double round = 0; //Öresavrundningen
+            uint back = 0; //Växel att få tillbaka
             uint amount500notes;
             uint amount100notes;
             uint amount50notes;
@@ -25,18 +25,73 @@ namespace ConsoleApplication2
             uint amount1coins;
 
 
-            //Console.Write("Ange totalsumman:");
-            //total = double.Parse(Console.ReadLine());
 
-            //Console.Write("Ange erhållet belopp:");
-            //sum = uint.Parse(Console.ReadLine());
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Ange totalsumman:");
+                    total = double.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nTotalsumman är felaktig.");
+                    Console.ResetColor();
+                }
+            }
 
-            //toPay = (uint)Math.Round(total);
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Ange erhållet belopp:");
+                    sum = uint.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nErhållet belopp är felaktigt.");
+                    Console.ResetColor();
+                }
+            }
+            toPay = (uint)Math.Round(total);
 
-            //round = toPay - total;
+            while (true)
+            {
+                try
+                {
 
-            //back = sum - toPay;
-            back = 2976;
+                    if (sum <= toPay)
+                    {
+                        throw new Exception();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nErhållet belopp är för litet.");
+                    Console.ResetColor();
+                    break;
+                }
+
+            }
+
+
+
+
+
+
+            round = toPay - total;
+
+            back = sum - toPay;
+
             if (back / 500 >= 1)
             {
                 amount500notes = back / 500;
@@ -70,15 +125,14 @@ namespace ConsoleApplication2
             {
                 amount5coins = back / 5;
                 back %= 5;
-
-                if (back / 1 >= 1)
-                {
-                    amount1coins = back / 1;
-                    back %= 1;
-                }
-                Console.WriteLine(back);
-
             }
+            if (back / 1 >= 1)
+            {
+                amount1coins = back / 1;
+                back %= 1;
+            }
+
+
         }
     }
 }
