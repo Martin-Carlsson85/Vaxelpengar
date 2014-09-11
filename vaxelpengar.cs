@@ -25,17 +25,17 @@ namespace vaxelpengar
             uint amount1coins;
 
 
-
+            // while-loop
             while (true)
             {
                 try
-                {
+                {   //Försöker översätta inmatat värde till en double-variabel.
                     Console.Write("Ange totalsumman:");
                     total = double.Parse(Console.ReadLine());
                     break;
                 }
                 catch
-                {
+                {   //Ifall det inte fungerade så kommer detta att köras istället.
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nTotalsumman är felaktig.");
                     Console.ResetColor();
@@ -45,25 +45,30 @@ namespace vaxelpengar
             while (true)
             {
                 try
-                {
+                {   //Försöker översätta inmatat värde till en double-variabel.
                     Console.Write("Ange erhållet belopp:");
                     sum = uint.Parse(Console.ReadLine());
                     break;
                 }
                 catch
-                {
+                {   //Ifall det inte fungerade så kommer detta att köras istället.
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nErhållet belopp är felaktigt.");
                     Console.ResetColor();
                 }
+
             }
-            
+
+            //Öresavrundningsmetod
             toPay = (uint)Math.Round(total);
 
+
+            //while-loop
             while (true)
             {
                 try
                 {
+                    //Om kunden betalar för lite pengar säger programmet ifrån (det blir fel). Denna funktion "Kastar" felet.
 
                     if (sum <= toPay)
                     {
@@ -75,19 +80,29 @@ namespace vaxelpengar
                     }
                 }
                 catch
-                {
+                {   
+                    //Här fångas felet upp och felmeddelande visas.
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nErhållet belopp är för litet.");
                     Console.ResetColor();
-                    break;
+                    Console.Write("Ange erhållet belopp:");
+                    sum = uint.Parse(Console.ReadLine());
+                    
                 }
 
             }
-
+            //Här räknas öresavrudningen fram.
             round = toPay - total;
 
+            //Här räknas kundens växel fram.
             back = sum - toPay;
 
+            //En variabel som kopierar "back" till "backFixed". Detta för att kunna ange växel som kunden ska ha tillbaka.
+            uint backFixed = back;
+
+            //if-satser som konstrollerar det kunden ska ha tillbaka. Växeln (back) delas med valören, 
+            //blir svaret högre än 1 så går programmet vidare.
+            
             if (back / 500 >= 1)
             {
                 amount500notes = back / 500;
@@ -131,14 +146,14 @@ namespace vaxelpengar
 
             }
 
-           
+
             //Kvitto
-            Console.WriteLine("KVITTO");
-            Console.WriteLine("Totalt", total);
-            Console.WriteLine("Öresavrudning", round);
-            Console.WriteLine("Att betala", toPay);
-            Console.WriteLine("Kontant", sum);
-            Console.WriteLine("Tillbaka", back);
+            Console.WriteLine("\nKVITTO");
+            Console.WriteLine("Totalt: {0}", total);
+            Console.WriteLine("Öresavrudning: {0}", round);
+            Console.WriteLine("Att betala: {0}", toPay);
+            Console.WriteLine("Kontant: {0}", sum);
+            Console.WriteLine("Tillbaka: {0}", backFixed);
 
         }
     }
