@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace vaxelpengar
 {
     class Program
     {
         static void Main(string[] args)
         {
             // Deklarera variabler
-            double total = 0; //Totaltsumman INNAN öresavrundningen
-            uint sum = 0; //Det kunden beatalar inkl.växel
-            uint toPay = 0; //Totaltsumman EFTER öresavrundningen
-            double round = 0; //Öresavrundningen
-            uint back = 0; //Växel att få tillbaka
+            double total = 0; //Totaltkostnad för köpet (nr.1)
+            uint sum = 0; //Det kunden betalar kontant (nr.4)
+            uint toPay = 0; //Att betala (nr.3)
+            double round = 0; //Öresavrundningen (nr.2)
+            uint back = 0; //Växel att få tillbaka (nr.5)
             uint amount500notes;
             uint amount100notes;
             uint amount50notes;
@@ -57,6 +57,7 @@ namespace ConsoleApplication2
                     Console.ResetColor();
                 }
             }
+            
             toPay = (uint)Math.Round(total);
 
             while (true)
@@ -82,11 +83,6 @@ namespace ConsoleApplication2
                 }
 
             }
-
-
-
-
-
 
             round = toPay - total;
 
@@ -120,18 +116,29 @@ namespace ConsoleApplication2
             {
                 amount10coins = back / 10;
                 back %= 10;
+
             }
             if (back / 5 >= 1)
             {
                 amount5coins = back / 5;
                 back %= 5;
+
             }
             if (back / 1 >= 1)
             {
                 amount1coins = back / 1;
                 back %= 1;
+
             }
 
+           
+            //Kvitto
+            Console.WriteLine("KVITTO");
+            Console.WriteLine("Totalt", total);
+            Console.WriteLine("Öresavrudning", round);
+            Console.WriteLine("Att betala", toPay);
+            Console.WriteLine("Kontant", sum);
+            Console.WriteLine("Tillbaka", back);
 
         }
     }
